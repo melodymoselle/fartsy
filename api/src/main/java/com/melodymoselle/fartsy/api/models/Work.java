@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "WORKS")
+@Table(name = "WORK")
 public class Work extends DatabaseEntity {
 
-    @Column
+    @Column(nullable = false)
     private String title;
     @Column
     private int year;
@@ -25,11 +25,68 @@ public class Work extends DatabaseEntity {
     @Column
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Exhibition> exhibitions;
-    @Column
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Bibliography> bibliographies;
-    @Column
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<File> files;
 
+    public Work() {
+    }
+
+    public Work(String title, int year) {
+        this.title = title;
+        this.year = year;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public String getDimensions() {
+        return dimensions;
+    }
+
+    public void setDimensions(String dimensions) {
+        this.dimensions = dimensions;
+    }
+
+    public Set<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(Set<Artist> artists) {
+        this.artists = artists;
+    }
+
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
+    }
+
+    public Set<Exhibition> getExhibitions() {
+        return exhibitions;
+    }
+
+    public void setExhibitions(Set<Exhibition> exhibitions) {
+        this.exhibitions = exhibitions;
+    }
 }

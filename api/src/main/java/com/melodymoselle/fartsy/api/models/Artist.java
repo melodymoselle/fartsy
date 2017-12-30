@@ -4,14 +4,14 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "ARTISTS")
+@Table(name = "ARTIST")
 public class Artist extends DatabaseEntity {
 
-    @Column
+    @Column(nullable = false)
     private String name;
     @Column
-    @OneToMany(cascade = {CascadeType.ALL})
-    private Set<BioSection> bioSections;
+    @OneToOne
+    private Biography biography;
     @Column
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Work> works;
@@ -20,14 +20,53 @@ public class Artist extends DatabaseEntity {
     private Set<Exhibition> exhibitions;
     @Column
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Bibliography> bibliographies;
-    @Column
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Image> images;
-    @Column
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<File> files;
 
+    public Artist() {
+    }
+
+    public Artist(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Work> getWorks() {
+        return works;
+    }
+
+    public void setWorks(Set<Work> works) {
+        this.works = works;
+    }
+
+    public Set<Exhibition> getExhibitions() {
+        return exhibitions;
+    }
+
+    public void setExhibitions(Set<Exhibition> exhibitions) {
+        this.exhibitions = exhibitions;
+    }
+
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
+    }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 
 
 }
